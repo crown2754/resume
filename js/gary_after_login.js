@@ -67,17 +67,39 @@ function buildTable(data) {
             render: function (data, type, row, meta) {
                 var $btn = '';
                 $btn = $('<input>', {
-                    type: 'date',
-                    value: data,
-                    id: "birthday_" + row.account_info_seq,
+                    type: 'number',
+                    min: '1900',
+                    max: '2023',
+                    style: 'width:55px',
+                    value: row.birthday_y,
+                    id: "birthday_y_" + row.account_info_seq,
                 }).prop('outerHTML');
+                $btn += "年";
+                $btn += $('<input>', {
+                    type: 'number',
+                    min: '1',
+                    max: '12',
+                    style: 'width:40px',
+                    value: row.birthday_m,
+                    id: "birthday_m_" + row.account_info_seq,
+                }).prop('outerHTML');
+                $btn += "月";
+                $btn += $('<input>', {
+                    type: 'number',
+                    min: '1',
+                    max: '31',
+                    style: 'width:40px',
+                    value: row.birthday_d,
+                    id: "birthday_d_" + row.account_info_seq,
+                }).prop('outerHTML');
+                $btn += "日";
                 return $btn
             },
             createdCell(cell, cellData, rowData, rowIndex, colIndex) {
                 $(cell).find('.btn').on('click', function () {
                     delAccount(rowData['account_info_seq']);
                 })
-            }, width: "5%"
+            }, width: "15%"
         }, {
             data: 'email',
             render: function (data, type, row, meta) {
@@ -197,7 +219,8 @@ function updateAccount(account_info_seq) {
             account: $("#account_" + account_info_seq).val(),
             name: $("#name_" + account_info_seq).val(),
             sex: $("#sex_" + account_info_seq).val(),
-            birthday: $("#birthday_" + account_info_seq).val(),
+            // birthday: $("#birthday_" + account_info_seq).val(),
+            birthday: $("#birthday_y_" + account_info_seq).val() + "-" + $("#birthday_m_" + account_info_seq).val() + "-" + $("#birthday_d_" + account_info_seq).val(),
             email: $("#email_" + account_info_seq).val(),
             note: $("#note_" + account_info_seq).val()
         };
@@ -206,26 +229,27 @@ function updateAccount(account_info_seq) {
 }
 
 function updateAccount2(account_info_seq) {
-        let ajax_data = {
-            'url': baseurl + 'M_home/updateAccount2',
-            'type': 'POST',
-            'dataType': 'html',
-            'cache': false,
-            'async': true,
-            'contentType': false,
-            'processData': false
-        };
-        let post_data = {
-            method: 'updateAccount2',
-            account_info_seq: account_info_seq,
-            account: $("#account_" + account_info_seq).val(),
-            name: $("#name_" + account_info_seq).val(),
-            sex: $("#sex_" + account_info_seq).val(),
-            birthday: $("#birthday_" + account_info_seq).val(),
-            email: $("#email_" + account_info_seq).val(),
-            note: $("#note_" + account_info_seq).val()
-        };
-        myAjaxPost(ajax_data, post_data);
+    let ajax_data = {
+        'url': baseurl + 'M_home/updateAccount2',
+        'type': 'POST',
+        'dataType': 'html',
+        'cache': false,
+        'async': true,
+        'contentType': false,
+        'processData': false
+    };
+    let post_data = {
+        method: 'updateAccount2',
+        account_info_seq: account_info_seq,
+        account: $("#account_" + account_info_seq).val(),
+        name: $("#name_" + account_info_seq).val(),
+        sex: $("#sex_" + account_info_seq).val(),
+        // birthday: $("#birthday_" + account_info_seq).val(),
+        birthday: $("#birthday_y_" + account_info_seq).val() + "-" + $("#birthday_m_" + account_info_seq).val() + "-" + $("#birthday_d_" + account_info_seq).val(),
+        email: $("#email_" + account_info_seq).val(),
+        note: $("#note_" + account_info_seq).val()
+    };
+    myAjaxPost(ajax_data, post_data);
 }
 
 function delDetails() {

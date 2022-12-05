@@ -24,7 +24,7 @@ class M_homedb extends CI_Model
             return '2';
         if (empty($post_vars['name']))
             return '3';
-        if (empty($post_vars['sex']))
+        if (!isset($post_vars['sex']))
             return '4';
         if (empty($post_vars['birthday']))
             return '5';
@@ -123,7 +123,10 @@ class M_homedb extends CI_Model
     {
         $sql = "
             SELECT
-                *
+                *,
+                SUBSTR(birthday,1,4) AS birthday_y,
+                SUBSTR(birthday,6,2) AS birthday_m,
+                SUBSTR(birthday,9,2) AS birthday_d
             FROM account_info
         ";
         $query = $this->db->query($sql);
@@ -136,6 +139,9 @@ class M_homedb extends CI_Model
                     'name' => $row['name'],
                     'sex' => $row['sex'],
                     'birthday' => $row['birthday'],
+                    'birthday_y' => $row['birthday_y'],
+                    'birthday_m' => $row['birthday_m'],
+                    'birthday_d' => $row['birthday_d'],
                     'email' => $row['email'],
                     'note' => $row['note']
                 );
