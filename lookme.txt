@@ -1,7 +1,7 @@
-noframework
+請先設定環境變數
 
 baseurl：
-	http://127.0.0.1/test/noframework
+	http://127.0.0.1/
 	
 dbname：
 	test
