@@ -1,0 +1,15 @@
+noframework
+
+baseurl：
+	http://127.0.0.1/test/noframework
+	
+dbname：
+	test
+mysql_account：
+	test
+mysql_password：
+	test@1234
+db編碼：
+	utf8mb4_general_ci
+
+請先建立資料庫後再執行 first_import.sql 新建資料表內容
