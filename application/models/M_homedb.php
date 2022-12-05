@@ -52,7 +52,7 @@ class M_homedb extends CI_Model
     {
         $sql = "
             SELECT
-                COUNT(account) AS account_count
+                *
             FROM
                 account_info
             WHERE
