@@ -36,7 +36,7 @@ class M_homedb extends CI_Model
             return '8';
         if (!$this->checkAccountFormat($post_vars))
             return '9';
-        if (!$this->checkAccountRepeat($post_vars))
+        if ($this->checkAccountRepeat($post_vars))
             return '10';
         return '1';
     }
