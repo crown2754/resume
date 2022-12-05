@@ -1,0 +1,11 @@
+CREATE TABLE `account_info` (
+    `account_info_seq` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主鍵',
+    `account` VARCHAR(20) NOT NULL COMMENT '帳號',
+    `name` VARCHAR(240) NOT NULL COMMENT '姓名',
+    `sex` VARCHAR(1) NOT NULL COMMENT '性別',
+    `birthday` DATE NOT NULL COMMENT '生日',
+    `email` VARCHAR(60) NOT NULL COMMENT '信箱',
+    `note` TEXT NULL COMMENT '備註',
+    PRIMARY KEY (`account_info_seq`),
+    UNIQUE (`account`)
+) ENGINE = InnoDB CHARSET = utf8mb4 COLLATE utf8mb4_general_ci COMMENT = '帳號資料表';
